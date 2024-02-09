@@ -5,7 +5,7 @@
 
 - Clone o projeto:
 ```
-git clone https://github.com/brunnorech/lavagem-automotiva.git
+git clone https://github.com/brunnorech/agenda-lavagem-automotiva.git
 ```
 - Acesse a pasta clonada:
 ```

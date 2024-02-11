@@ -1,15 +1,5 @@
 import { Modal } from 'react-native'
-import { useRef } from 'react'
-import {
-  Box,
-  Button,
-  Center,
-  Icon,
-  Image,
-  Spacer,
-  Text,
-  VStack,
-} from 'native-base'
+import { Box, Button, Center, Text, VStack } from 'native-base'
 
 type ConfirmModalProps = {
   isOpen: boolean
@@ -32,16 +22,22 @@ export const AlertModal = ({
   cancelLabel,
   variant,
 }: ConfirmModalProps) => {
+  const color = {
+    sucess: 'success.600',
+    cancel: 'error.600',
+  }[variant]
+
+  const colorScheme = {
+    sucess: 'success',
+    cancel: 'error',
+  }[variant]
+
   return (
     <Modal visible={isOpen} animationType="slide">
       <Box flex={1} justifyContent="center" bgColor="coolGray.200" p="4">
         <VStack>
           <Center pb="4" pt="4">
-            <Text
-              fontSize={24}
-              bold
-              color={variant === 'sucess' ? 'success.600' : 'error.600'}
-            >
+            <Text fontSize={24} bold color={color}>
               {title}
             </Text>
             <Text mt="4" fontSize={17}>
@@ -50,11 +46,7 @@ export const AlertModal = ({
           </Center>
           <Box top="150">
             <VStack>
-              <Button
-                onPress={onSubmit}
-                mb="4"
-                colorScheme={variant === 'sucess' ? 'success' : 'error'}
-              >
+              <Button onPress={onSubmit} mb="4" colorScheme={colorScheme}>
                 {actionLabel.toUpperCase()}
               </Button>
               <Button variant="ghost" colorScheme="primary" onPress={onClose}>

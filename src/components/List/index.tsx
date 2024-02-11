@@ -1,4 +1,4 @@
-import { FlatList, Box, Heading, Text, Center } from 'native-base'
+import { FlatList } from 'native-base'
 import { ListItem } from '../ListItem'
 import { ScheduleType } from '../../types/schedule'
 
@@ -13,9 +13,18 @@ export const List = ({
   onCompleteSchedule,
   onCancelSchedule,
 }: ListProps) => {
+  const compareStartHours = (a: ScheduleType, b: ScheduleType) => {
+    const hourA = Number(a.startHour.substring(0, 2))
+    const hourB = Number(b.startHour.substring(0, 2))
+
+    return hourA - hourB
+  }
+
+  const sortedData = (data ?? []).sort(compareStartHours)
+
   return (
     <FlatList
-      data={data}
+      data={sortedData}
       padding={4}
       renderItem={({ item }) => (
         <ListItem

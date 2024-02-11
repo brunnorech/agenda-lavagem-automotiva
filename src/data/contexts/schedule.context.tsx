@@ -7,6 +7,9 @@ import { getDefaultHours } from '../../utils/getDefaultHours'
 
 type ScheduleProps = ScheduleType[]
 
+const SIMPLE_WASH_DURATION_IN_MINUTES = 30
+const COMPLETE_WASH_DURATION_IN_MINUTES = 30
+
 export type ContextType = {
   schedules: ScheduleProps
   addSchedule: (value: ScheduleType) => void
@@ -20,7 +23,11 @@ export const ScheduleProvider = (props: { children: JSX.Element }) => {
   const [schedules, setSchedules] = useState<ScheduleProps>([])
 
   const getEndTime = (washingOption: CarWashType, baseTime: string): string => {
-    const addedMinutes = washingOption === 'simple' ? 30 : 45
+    const addedMinutes = {
+      simple: SIMPLE_WASH_DURATION_IN_MINUTES,
+      complete: COMPLETE_WASH_DURATION_IN_MINUTES,
+    }[washingOption]
+
     const newHour = format(
       addMinutes(new Date(`1970-01-01T${baseTime}`), addedMinutes),
       'HH:mm'
@@ -49,7 +56,13 @@ export const ScheduleProvider = (props: { children: JSX.Element }) => {
     savedHoursToRemove: ScheduleProps,
     washType: CarWashType
   ) => {
-    const indexesToRemove = washType === 'simple' ? -1 : -2
+    const INDEX_TO_REMOVE_IN_SIMPLE_WASH = -1
+    const INDEX_TO_REMOVE_IN_COMPLETE_WASH = -2
+
+    const indexesToRemove = {
+      simple: INDEX_TO_REMOVE_IN_SIMPLE_WASH,
+      complete: INDEX_TO_REMOVE_IN_COMPLETE_WASH,
+    }[washType]
 
     let new_options = [...availableHours]
 

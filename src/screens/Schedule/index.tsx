@@ -2,7 +2,6 @@ import * as React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { RouterStackParamList } from '../../types/routerNavigation'
 import {
-  Box,
   Center,
   Heading,
   VStack,

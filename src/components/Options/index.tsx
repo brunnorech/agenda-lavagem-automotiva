@@ -2,7 +2,7 @@ import { Box, HStack, Pressable, Text } from 'native-base'
 import { useState } from 'react'
 import { Controller, FieldValues, UseControllerProps } from 'react-hook-form'
 import { Keyboard } from 'react-native'
-import { CarWashType, ScheduleType } from '../../types/schedule'
+import { CarWashType } from '../../types/schedule'
 
 type IOption = {
   options: { label: string; value: CarWashType }[]
@@ -11,7 +11,6 @@ type IOption = {
 
 export function Options<FormType extends FieldValues>({
   options,
-  value,
   control,
   rules,
   name,
